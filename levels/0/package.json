@@ -1,4 +1,7 @@
 {
+  "scripts": {
+      "start": "node level00.js"
+  },
   "author": "Greg Brockman <gdb@stripe.com>",
   "name": "level00",
   "description": "Level 0 of CTF",
@@ -8,11 +11,12 @@
     "url": "git://github.com/stripe-internal/web-ctf.git"
   },
   "engines": {
-    "node": "~v0.4.9"
+    "node": "~v0.10.35"
   },
   "dependencies": {
-    "express": "",
-    "sqlite3": "2.1.5",
+    "express": "4.11.1",
+    "body-parser": "1.10.2",
+    "sqlite3": "3.0.4",
     "mu2": ""
   },
   "devDependencies": {}

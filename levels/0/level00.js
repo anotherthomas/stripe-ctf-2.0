@@ -3,6 +3,8 @@
 
 var express = require('express'), // Web framework
     mu = require('mu2'),          // Mustache.js templating
+    bodyParser = require('body-parser'),
+    crypto = require('crypto'),
     sqlite3 = require('sqlite3'); // SQLite (database) driver
 
 // Look for templates in the current directory
@@ -10,16 +12,28 @@ mu.root = __dirname;
 
 // Set up the DB
 var db = new sqlite3.Database('level00.db');
+db.serialize(function() {
 db.run(
   'CREATE TABLE IF NOT EXISTS secrets (' +
     'key varchar(255),' +
     'secret varchar(255)' +
   ')'
 );
+  db.get(
+      'SELECT * FROM secrets;'
+      , function(err, answer) {
+          if (!answer) {
+              var buf = process.env.PASSWORD_LEVEL1;
+              db.run(
+                  'INSERT INTO secrets values("level1.password", "' + buf + '")');
+          }
+      })
+  })
+
 
 // Create the server
 var app = express();
-app.use(express.bodyParser());
+app.use(bodyParser());
 
 function renderPage(res, variables) {
   var stream = mu.compileAndRender('level00.html', variables);
