@@ -1,3 +1,12 @@
+<?php
+$password_file = 'level02-password.txt';
+if (!file_exists($password_file)) {
+    $handle = fopen($password_file, 'w');
+    fwrite($handle, $_ENV['PASSWORD_LEVEL2']);
+    fclose($handle);
+}
+?>
+    
 <html>
   <head>
     <title>Guessing Game</title>
