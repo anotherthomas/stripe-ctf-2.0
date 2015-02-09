@@ -48,7 +48,7 @@ app.secret_key = open(os.path.join(data_dir, 'entropy.dat')).read()
 try:
     from local_settings import url_root
 except ImportError:
-    pass
+    url_root=""
 
 def absolute_url(path):
     return url_root + path
@@ -101,4 +101,7 @@ def login():
 
 if __name__ == '__main__':
     # In development: app.run(debug=True)
-    app.run()
+    if "HOST" in os.environ:
+        app.run(host=os.environ["HOST"])
+    else:
+        app.run()
