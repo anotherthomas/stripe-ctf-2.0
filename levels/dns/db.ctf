@@ -1,0 +1,15 @@
+;
+; BIND reverse data file for broadcast zone
+;
+$TTL	604800
+@	IN	SOA	ns.ctf.tng.retreat. mail.ctf.tng.retreat. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	ns.ctf.tng.retreat.
+ns	IN	A	192.168.168.192
+a	IN	A	172.17.0.4
+

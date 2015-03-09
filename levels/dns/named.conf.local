@@ -1,0 +1,24 @@
+key ctf.tng.retreat. {
+    algorithm "HMAC-MD5"; 
+        secret "hjScR9gNoz0PY3CgNSmtHRdeEejNrHDyIfwufM0FY/8YfVXlY0j2LO3tSpDbMcCvj26FGJn4//XlXx7qz519rQ==";
+};
+
+zone "ctf.tng.retreat" {
+    type master;
+    file "/etc/bind/db.ctf";
+    journal "/var/lib/bind/ctf.tng.retreat.jnl";
+    allow-update{
+        key ctf.tng.retreat.;
+    };
+};
+
+zone "0.17.172.in-addr.arpa" IN {
+    type master;
+    file "/etc/bind/0.17.172.in-addr.arpa";
+    journal "/var/lib/bind/0.17.172.in-addr.arpa.jnl";
+    allow-update{
+        key ctf.tng.retreat.;
+    };
+};
+
+

@@ -1,0 +1,28 @@
+frontend:
+    image: frontend
+    links:
+        - level0
+        - level1
+        - level2
+        - level3
+        - level4
+        - level5
+        - level6
+        - level7
+level0:
+    image: level0
+level1:
+    image: level1
+level2:
+    image: level2
+level3:
+    image: level3
+level4:
+    image: level4
+level5:
+    image: level5
+level6:
+    image: level6
+level7:
+    image: level7
+
