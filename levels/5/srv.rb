@@ -17,8 +17,8 @@ module DomainAuthenticator
 
     # Run with the production file on the server
     if File.exists?('production')
-      PASSWORD_HOSTS = /^level05-\d+\.stripe-ctf\.com$/
-      ALLOWED_HOSTS = /\.stripe-ctf\.com$/
+      PASSWORD_HOSTS = /^level5\.ctf\.tng\.retreat$/
+      ALLOWED_HOSTS = /\.ctf\.tng\.retreat$/
     else
       PASSWORD_HOSTS = /^localhost$/
       ALLOWED_HOSTS = //

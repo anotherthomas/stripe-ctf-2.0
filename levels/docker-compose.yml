@@ -11,8 +11,12 @@ frontend:
         - level7
 level0:
     image: level0
+    environment:
+        PASSWORD_LEVEL1: reallyrandom
 level1:
     image: level1
+    environment:
+        PASSWORD_LEVEL2: someotherpassword
 level2:
     image: level2
 level3:
@@ -21,6 +25,7 @@ level4:
     image: level4
 level5:
     image: level5
+    dns: 192.168.168.192
 level6:
     image: level6
 level7:
