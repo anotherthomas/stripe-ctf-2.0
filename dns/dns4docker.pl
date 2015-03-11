@@ -18,7 +18,6 @@ my $DNS_TTL = 15 * 60;
 openlog('dns4docker', LOG_PID | LOG_CONS, LOG_USER);
 
 my $dns = Net::DNS::Resolver->new(nameservers => [ $DNS_SERVER ]);
-my $config = Config::Auto->new(source => '/etc/docker/dns4docker.conf')->parse;
 
 open my $events, '-|', qw(docker events) or do {
     syslog LOG_CRIT, 'Cannot listen to docker events: %s!', $!;
@@ -38,7 +37,7 @@ while (<$events>) {
 
     my $container_details = decode_json `docker inspect $container`;
 
-    my $hostname = get_hostname_for_container($config, $image, $tag, $container_details);
+    my $hostname = get_hostname_for_container($image, $tag, $container_details);
     if ($hostname) {
         syslog LOG_INFO, 'determined hostname: %s', $hostname;
         if ($action eq 'start') {
@@ -109,18 +108,15 @@ sub update_dns {
 }
 
 sub get_hostname_for_container {
-    my ($config, $image, $tag, $details) = @_;
+    my ($image, $tag, $details) = @_;
 
-    my $config_entry = $config->{"$image:$tag"} || $config->{$image};
-    return unless $config_entry;
-
-    no strict 'refs';
-    return defined &$config_entry ? &$config_entry($details->[0]) : $config_entry;
+    return host_from_image($details->[0]);
 }
 
 sub host_from_image {
     my $details = shift;
 
     my ($image, $version) = split(":", $details->{Config}{Image});
-    return "$image";
+    my ($prefix, $hostname) = split("_", $image);
+    return "$hostname";
 }

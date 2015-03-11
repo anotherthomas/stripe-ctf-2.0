@@ -1,5 +1,5 @@
 frontend:
-    image: frontend
+    build: nginx
     links:
         - level0
         - level1
@@ -10,24 +10,44 @@ frontend:
         - level6
         - level7
 level0:
-    image: level0
+    build: ./0
     environment:
-        PASSWORD_LEVEL1: reallyrandom
-level1:
-    image: level1
-    environment:
-        PASSWORD_LEVEL2: someotherpassword
-level2:
-    image: level2
-level3:
-    image: level3
-level4:
-    image: level4
-level5:
-    image: level5
-    dns: 192.168.168.192
-level6:
-    image: level6
-level7:
-    image: level7
+        - PASSWORD_LEVEL1
 
+level1:
+    build: ./1
+    environment:
+        - PASSWORD_LEVEL2
+
+level2:
+    build: ./2
+
+level3:
+    build: ./3
+
+level4:
+    build: ./4
+level4fountain:
+    build: ./4/fountain
+    links:
+        - level4
+
+level5:
+    build: ./5
+    dns: 192.168.168.192
+
+level6:
+    build: ./6
+level6fountain:
+    build: ./6/fountain
+    links:
+        - level6
+level7:
+    build: ./7
+
+level8:
+    build: ./8
+    links:
+        - level2
+    environment:
+        - PASSWORD_FINAL

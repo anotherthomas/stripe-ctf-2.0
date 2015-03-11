@@ -4,8 +4,7 @@ apt-get update
 apt-get install -y python-pip lxc-docker bind9 libconfig-auto-perl libunix-syslog-perl libjson-xs-perl libnet-dns-perl
 pip install docker-compose
 usermod -a -G docker vagrant
-cp /vagrant/dns/dns4docker.conf /etc/docker
 cp /vagrant/dns/dns4docker.pl /usr/bin/
 cp -r /vagrant/dns/* /etc/bind/
 cp /vagrant/dns/dns4docker-upstart.conf /etc/init/
-service bind restart
+service bind9 restart
