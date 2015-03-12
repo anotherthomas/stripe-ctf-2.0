@@ -9,6 +9,7 @@ frontend:
         - level5
         - level6
         - level7
+        - level8
 level0:
     build: ./0
     environment:
@@ -21,9 +22,13 @@ level1:
 
 level2:
     build: ./2
+    environment:
+        - PASSWORD_LEVEL3
 
 level3:
     build: ./3
+    environment:
+        - PASSWORD_LEVEL4
 
 level4:
     build: ./4
@@ -31,10 +36,14 @@ level4fountain:
     build: ./4/fountain
     links:
         - level4
+    environment:
+        - PASSWORD_LEVEL5
 
 level5:
     build: ./5
     dns: 192.168.168.192
+    environment:
+        - PASSWORD_LEVEL6
 
 level6:
     build: ./6
@@ -42,8 +51,13 @@ level6fountain:
     build: ./6/fountain
     links:
         - level6
+    environment:
+        - PASSWORD_LEVEL7
+
 level7:
     build: ./7
+    environment:
+        - PASSWORD_LEVEL8
 
 level8:
     build: ./8
