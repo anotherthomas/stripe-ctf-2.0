@@ -32,6 +32,8 @@ level3:
 
 level4:
     build: ./4
+    environment:
+        - PASSWORD_LEVEL5
 level4fountain:
     build: ./4/fountain
     links:
@@ -47,6 +49,8 @@ level5:
 
 level6:
     build: ./6
+    environment:
+        - PASSWORD_LEVEL7
 level6fountain:
     build: ./6/fountain
     links:

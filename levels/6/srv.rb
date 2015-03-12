@@ -9,7 +9,7 @@ require 'sequel'
 require 'sinatra'
 
 module Streamer
-  PASSWORD = File.read('password.txt').strip
+  PASSWORD = ENV['PASSWORD_LEVEL7']
 
   # Only needed in production
   URL_ROOT = File.read('url_root.txt').strip rescue ''
